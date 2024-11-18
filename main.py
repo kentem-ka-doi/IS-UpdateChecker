@@ -108,5 +108,5 @@ if __name__ == "__main__":
             # 結果を出力
             if newer_tags:
                 print(f"[{note}] Newer versions available for {repo} (current: {current_tag}): {', '.join(newer_tags)}")
-            else:
-                print(f"[{note}] You are using the latest version for {repo} (current: {current_tag})")
+            # else:
+                # print(f"[{note}] You are using the latest version for {repo} (current: {current_tag})")
