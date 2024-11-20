@@ -25,7 +25,12 @@
         "note": "OscCompanySearch mariadb",
         "current_tag": "10.11.10",
         "include": ["^10.\\d+.\\d+$"],
-        "exclude": []
+        "exclude": [],
+        "auto_update": false,
+        "repo_url": "http://ks-gitbucket.kentem.net:8200/git/Oracle/OscCompanySearch.git",
+        "deploy_key_name": "id_ed25519_osc-company-search",
+        "branch": "master",
+        "dockerfile_path": "production/nginx/Dockerfile"
       },
       {
         "note": "IS-OrderMaster-LaravelUI db",

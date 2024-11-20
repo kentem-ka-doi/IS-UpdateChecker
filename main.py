@@ -3,6 +3,9 @@ import requests
 import re
 import json
 import concurrent.futures
+import os
+import shutil
+import git
 
 # ページを非同期で取得
 def fetch_page(url, timeout=10):
@@ -85,6 +88,48 @@ def get_latest_version_tag(tags, current_tag):
                 latest_tag = tag
     return latest_tag
 
+# Dockerfileの更新
+def update_dockerfile(dockerfile_path, current_tag, new_tag):
+    with open(dockerfile_path, "r") as file:
+        content = file.read()
+    updated_content = content.replace(current_tag, new_tag)
+    with open(dockerfile_path, "w") as file:
+        file.write(updated_content)
+
+# Gitリポジトリのクローン、コミット、プッシュ（DeployKeyを使用）
+def clone_and_update_repo(repo_url, dockerfile_path, current_tag, new_tag, deploy_key_name, branch="main"):
+    # 一時ディレクトリにリポジトリをクローン
+    temp_dir = "temp_repo"
+    if os.path.exists(temp_dir):
+        shutil.rmtree(temp_dir)
+
+    # DeployKeyの読み込み
+    deploy_key_path = f"/root/.ssh/{os.getenv(deploy_key_name)}"
+    if not deploy_key_path:
+        print(f"Deploy key path for {deploy_key_name} not found in environment variables.")
+        return
+
+    git_ssh_cmd = f'ssh -i {deploy_key_path}'
+
+    with git.Git().custom_environment(GIT_SSH_COMMAND=git_ssh_cmd):
+        repo = git.Repo.clone_from(repo_url, temp_dir, branch=branch)
+
+    # Dockerfileのパスを取得
+    dockerfile_full_path = os.path.join(temp_dir, dockerfile_path)
+
+    # Dockerfileを更新
+    update_dockerfile(dockerfile_full_path, current_tag, new_tag)
+
+    # Gitで変更をコミットしてプッシュ
+    with repo.git.custom_environment(GIT_SSH_COMMAND=git_ssh_cmd):
+        repo.git.add(update=True)
+        repo.index.commit(f"Update Dockerfile from {current_tag} to {new_tag}")
+        origin = repo.remote(name='origin')
+        origin.push(branch)
+
+    # 一時ディレクトリを削除
+    shutil.rmtree(temp_dir)
+
 # 設定ファイルを読み込む
 def load_config(config_file):
     with open(config_file, "r") as f:
@@ -97,7 +142,7 @@ if __name__ == "__main__":
 
     for repo, filter_sets in repositories.items():
         if not isinstance(filter_sets, list):
-            print(f"Skipping {repo}: Expected a list of filter sets, got {type(filter_sets).__name__}\n")
+            print(f"Skipping {repo}: Expected a list of filter sets, got {type(filter_sets).__name__}\n\n")
             continue
 
         for filters in filter_sets:
@@ -105,6 +150,9 @@ if __name__ == "__main__":
             current_tag = filters["current_tag"]
             include_patterns = filters["include"]
             exclude_patterns = filters["exclude"]
+            auto_update = filters.get("auto_update", False)
+            deploy_key_name = filters.get("deploy_key_name")
+            branch = filters.get("branch")
 
             # DockerHubからすべてのタグを取得（並列処理、max_pages=3）
             all_tags = get_latest_tags_parallel(repo, max_pages=3, page_size=100)
@@ -115,8 +163,16 @@ if __name__ == "__main__":
             # 最も新しいタグを取得
             latest_tag = get_latest_version_tag(filtered_tags, current_tag)
 
-            # 結果を出力
+            # 更新が必要な場合、リポジトリをクローンしてDockerfileを更新しプッシュ
             if latest_tag:
-                print(f"[{note}] Latest version available for {repo} (current: {current_tag}): {latest_tag}\n")
-            # else:
-                # print(f"[{note}] You are using the latest version for {repo} (current: {current_tag})")
+                print(f"[{note}] Latest version available for {repo} (current: {current_tag}): {latest_tag}\n\n")
+                
+                if auto_update:
+                    # リポジトリ情報を設定
+                    repo_url = filters.get("repo_url")  # リポジトリのURL (GitHub/GitBucket)
+                    dockerfile_path = filters.get("dockerfile_path", "Dockerfile")  # Dockerfileのパス
+
+                    if repo_url and deploy_key_name:
+                        clone_and_update_repo(repo_url, dockerfile_path, current_tag, latest_tag, deploy_key_name, branch)
+                    else:
+                        print(f"No repository URL or deploy key name provided for {repo}. Skipping update.\n\n")
