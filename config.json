@@ -72,19 +72,19 @@
       {
         "note": "php-common.base.kentem-id",
         "current_tag": "8.3.13-fpm-alpine3.20",
-        "include": ["^8.3.\\d+-alpine.*$"],
+        "include": ["^8.3.\\d+-fpm-alpine.*$"],
         "exclude": []
       },
       {
         "note": "OscCompanySearch php",
         "current_tag": "8.3.3-fpm-alpine3.19",
-        "include": ["^8.3.\\d+-alpine.*$"],
+        "include": ["^8.3.\\d+-fpm-alpine.*$"],
         "exclude": []
       },
       {
         "note": "IS-OrderMaster-LaravelUI composer, php",
         "current_tag": "8.1.27-fpm-alpine3.19",
-        "include": ["^8.1.\\d+-alpine.*$"],
+        "include": ["^8.1.\\d+-fpm-alpine.*$"],
         "exclude": []
       }
     ],
