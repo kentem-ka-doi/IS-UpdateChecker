@@ -4,27 +4,33 @@
       {
         "note": "composer.base.kentem-id",
         "current_tag": "2.8.2",
-        "include": ["^2.*$"],
+        "include": ["^2.\\d+.\\d+$"],
         "exclude": []
       },
       {
         "note": "IS-OrderMaster-LaravelUI composer",
         "current_tag": "2.7.2",
-        "include": ["^2.*$"],
+        "include": ["^2.\\d+.\\d+$"],
+        "exclude": []
+      },
+      {
+        "note": "OscCompanySearch php",
+        "current_tag": "2.8.3",
+        "include": ["^2.\\d+.\\d+$"],
         "exclude": []
       }
     ],
     "mariadb": [
       {
         "note": "OscCompanySearch mariadb",
-        "current_tag": "10.11.7",
-        "include": ["^10.*$"],
+        "current_tag": "10.11.10",
+        "include": ["^10.\\d+.\\d+$"],
         "exclude": []
       },
       {
         "note": "IS-OrderMaster-LaravelUI db",
         "current_tag": "10.11.6",
-        "include": ["^10.*$"],
+        "include": ["^10.\\d+.\\d+$"],
         "exclude": []
       }
     ],
@@ -32,19 +38,19 @@
       {
         "note": "kentem-academy-crm-api, nginx.kentem-id",
         "current_tag": "1.27.2-alpine3.20-slim",
-        "include": ["^1.27.\\d+-alpine.*-slim$"],
+        "include": ["^1.\\d+.\\d+-alpine\\d+.\\d+-slim$"],
         "exclude": []
       },
       {
         "note": "OscCompanySearch nginx",
-        "current_tag": "1.25.4-alpine3.18",
-        "include": ["^1.25.\\d+-alpine.*$"],
+        "current_tag": "1.27.2-alpine3.20-slim",
+        "include": ["^1.\\d+.\\d+-alpine\\d+.\\d+-slim$"],
         "exclude": []
       },
       {
         "note": "IS-OrderMaster-LaravelUI nginx",
         "current_tag": "1.25.3-alpine3.18",
-        "include": ["^1.25.\\d+-alpine.*$"],
+        "include": ["^1.\\d+.\\d+-alpine\\d+.\\d+$"],
         "exclude": []
       }
     ],
@@ -52,19 +58,19 @@
       {
         "note": "kentem-academy-crm",
         "current_tag": "23.1.0-alpine3.20",
-        "include": ["^23.\\d+.\\d+-alpine.*$"],
+        "include": ["^23.\\d+.\\d+-alpine\\d+.\\d+$"],
         "exclude": []
       },
       {
         "note": "OscCompanySearch nginx, php",
         "current_tag": "21.7.1-alpine3.19",
-        "include": ["^21.\\d+.\\d+-alpine.*$"],
+        "include": ["^21.\\d+.\\d+-alpine\\d+.\\d+$"],
         "exclude": []
       },
       {
         "note": "IS-OrderMaster-LaravelUI npm, nginx",
         "current_tag": "20.11.0-alpine3.19",
-        "include": ["^20.\\d+.\\d+-alpine.*$"],
+        "include": ["^20.\\d+.\\d+-alpine\\d+.\\d+$"],
         "exclude": []
       }
     ],
@@ -72,19 +78,19 @@
       {
         "note": "php-common.base.kentem-id",
         "current_tag": "8.3.13-fpm-alpine3.20",
-        "include": ["^8.3.\\d+-fpm-alpine.*$"],
+        "include": ["^8.3.\\d+-fpm-alpine\\d+.\\d+$"],
         "exclude": []
       },
       {
         "note": "OscCompanySearch php",
-        "current_tag": "8.3.3-fpm-alpine3.19",
-        "include": ["^8.3.\\d+-fpm-alpine.*$"],
+        "current_tag": "8.3.13-fpm-alpine3.20",
+        "include": ["^8.3.\\d+-fpm-alpine\\d+.\\d+$"],
         "exclude": []
       },
       {
         "note": "IS-OrderMaster-LaravelUI composer, php",
         "current_tag": "8.1.27-fpm-alpine3.19",
-        "include": ["^8.1.\\d+-fpm-alpine.*$"],
+        "include": ["^8.1.\\d+-fpm-alpine\\d+.\\d+$"],
         "exclude": []
       }
     ],
@@ -92,13 +98,13 @@
       {
         "note": "IS-OrderMaster-LaravelUI redis",
         "current_tag": "6.2.7",
-        "include": ["^6.*$"],
+        "include": ["^6.\\d+.\\d+$"],
         "exclude": []
       },
       {
         "note": "OscCompanySearch redis",
-        "current_tag": "7.2.4-alpine3.19",
-        "include": ["^7.\\d.\\d+-alpine.*$"],
+        "current_tag": "7.4.1-alpine3.20",
+        "include": ["^7.\\d+.\\d+-alpine\\d+.\\d+$"],
         "exclude": []
       }
     ],
@@ -106,15 +112,15 @@
       {
         "note": "php.base.kentem-id",
         "current_tag": "5.1.5-php8.3-alpine",
-        "include": ["^5.1.\\d+-php8.3-alpine.*$"],
+        "include": ["^5.\\d+.\\d+-php8.3-alpine.*$"],
         "exclude": []
       }
     ],
     "steveltn/https-portal": [
       {
         "note": "OscCompanySearch https-portal",
-        "current_tag": "1.23.0",
-        "include": ["^1.*$"],
+        "current_tag": "1.24.2",
+        "include": ["^1.\\d+.\\d+$"],
         "exclude": []
       }
     ]
