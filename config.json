@@ -30,7 +30,7 @@
         "repo_url": "http://ks-gitbucket.kentem.net:8200/git/Oracle/OscCompanySearch.git",
         "deploy_key_name": "id_ed25519_osc-company-search",
         "branch": "master",
-        "dockerfile_path": "production/nginx/Dockerfile"
+        "dockerfile_path": "production/mariadb/Dockerfile"
       },
       {
         "note": "IS-OrderMaster-LaravelUI db",
