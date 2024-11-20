@@ -16,7 +16,7 @@
     ],
     "mariadb": [
       {
-        "note": "OscCompanySearch db",
+        "note": "OscCompanySearch mariadb",
         "current_tag": "10.11.7",
         "include": ["^10.*$"],
         "exclude": []
@@ -107,6 +107,14 @@
         "note": "php.base.kentem-id",
         "current_tag": "5.1.5-php8.3-alpine",
         "include": ["^5.1.\\d+-php8.3-alpine.*$"],
+        "exclude": []
+      }
+    ],
+    "steveltn/https-portal": [
+      {
+        "note": "OscCompanySearch https-portal",
+        "current_tag": "1.23.0",
+        "include": ["^1.*$"],
         "exclude": []
       }
     ]
