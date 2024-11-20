@@ -3,7 +3,7 @@
     "composer": [
       {
         "note": "composer.base.kentem-id",
-        "current_tag": "2.8.2",
+        "current_tag": "2.8.3",
         "include": ["^2.\\d+.\\d+$"],
         "exclude": []
       },
