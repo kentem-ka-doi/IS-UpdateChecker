@@ -76,6 +76,15 @@ def is_newer_version(current_tag, latest_tag):
     # オプション部分の比較
     return latest_options > current_options
 
+# 最も新しいタグを取得
+def get_latest_version_tag(tags, current_tag):
+    latest_tag = None
+    for tag in tags:
+        if is_newer_version(current_tag, tag):
+            if latest_tag is None or is_newer_version(latest_tag, tag):
+                latest_tag = tag
+    return latest_tag
+
 # 設定ファイルを読み込む
 def load_config(config_file):
     with open(config_file, "r") as f:
@@ -88,7 +97,7 @@ if __name__ == "__main__":
 
     for repo, filter_sets in repositories.items():
         if not isinstance(filter_sets, list):
-            print(f"Skipping {repo}: Expected a list of filter sets, got {type(filter_sets).__name__}\n\n")
+            print(f"Skipping {repo}: Expected a list of filter sets, got {type(filter_sets).__name__}\n")
             continue
 
         for filters in filter_sets:
@@ -103,11 +112,11 @@ if __name__ == "__main__":
             # フィルタリング
             filtered_tags = filter_tags(all_tags, include_patterns, exclude_patterns)
 
-            # 新しいバージョンを探す
-            newer_tags = [tag for tag in filtered_tags if is_newer_version(current_tag, tag)]
+            # 最も新しいタグを取得
+            latest_tag = get_latest_version_tag(filtered_tags, current_tag)
 
             # 結果を出力
-            if newer_tags:
-                print(f"[{note}] Newer versions available for {repo} (current: {current_tag}): {', '.join(newer_tags)}\n\n")
+            if latest_tag:
+                print(f"[{note}] Latest version available for {repo} (current: {current_tag}): {latest_tag}\n")
             # else:
                 # print(f"[{note}] You are using the latest version for {repo} (current: {current_tag})")
