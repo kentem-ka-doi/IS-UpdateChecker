@@ -1,3 +1,4 @@
+# coding: UTF-8
 import requests
 import re
 import json
@@ -87,7 +88,7 @@ if __name__ == "__main__":
 
     for repo, filter_sets in repositories.items():
         if not isinstance(filter_sets, list):
-            print(f"Skipping {repo}: Expected a list of filter sets, got {type(filter_sets).__name__}")
+            print(f"Skipping {repo}: Expected a list of filter sets, got {type(filter_sets).__name__}\n\n")
             continue
 
         for filters in filter_sets:
@@ -107,6 +108,6 @@ if __name__ == "__main__":
 
             # 結果を出力
             if newer_tags:
-                print(f"[{note}] Newer versions available for {repo} (current: {current_tag}): {', '.join(newer_tags)}")
+                print(f"[{note}] Newer versions available for {repo} (current: {current_tag}): {', '.join(newer_tags)}\n\n")
             # else:
                 # print(f"[{note}] You are using the latest version for {repo} (current: {current_tag})")
