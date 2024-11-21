@@ -62,8 +62,8 @@
     "node": [
       {
         "note": "kentem-academy-crm",
-        "current_tag": "23.2.0-alpine3.20",
-        "include": ["^23.\\d+.\\d+-alpine\\d+.\\d+$"],
+        "current_tag": "22.11.0-alpine3.20",
+        "include": ["^22.\\d+.\\d+-alpine\\d+.\\d+$"],
         "exclude": []
       },
       {
